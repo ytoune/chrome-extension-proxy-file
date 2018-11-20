@@ -1,0 +1,14 @@
+{
+  "name": "Proxy Files",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "proxy file requests",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "<all_urls>", "webRequest", "webRequestBlocking"
+  ]
+}
