@@ -5,21 +5,21 @@ const fs = require('fs')
 const {promisify} = require('util')
 
 const copyFile = promisify(fs.copyFile)
-const rmdir = promisify(fs.rmdir)
+const rmdir = promisify(require('rmdir'))
 const mkdir = promisify(fs.mkdir)
 const readdir = promisify(fs.readdir)
 
 const main = async () => {
 
-	const publicPath = resolve('public')
-	const buildPath = resolve('build')
+	const publicPath = resolve('../public')
+	const buildPath = resolve('../build')
 
 	try { await rmdir(buildPath) } catch(x) {}
 
 	await mkdir(buildPath)
 
 	await Promise.all(
-		readdir(publicPath)
+		(await readdir(publicPath))
 			.map(async file => {
 				await copyFile(`${publicPath}/${file}`, `${buildPath}/${file}`)
 			})
@@ -28,4 +28,4 @@ const main = async () => {
 
 }
 
-Promise.resolve().then(main)
+Promise.resolve().then(main).catch(x => console.error(x))
