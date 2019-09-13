@@ -1,8 +1,6 @@
+const { DONE } = XMLHttpRequest
 
-const {DONE} = XMLHttpRequest
-
-export const fetchSync = path => {
-
+export const fetchSync = (path: string) => {
 	var xhr = new XMLHttpRequest()
 	xhr.open('GET', path, false)
 	xhr.onload = _ => {
@@ -20,5 +18,4 @@ export const fetchSync = path => {
 	xhr.send(null)
 
 	return xhr.responseText
-
 }
