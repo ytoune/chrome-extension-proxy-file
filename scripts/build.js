@@ -1,29 +1,22 @@
 //@ts-check
 const path = require('path')
-const fs = require('fs')
-const { promisify } = require('util')
+const fs = require('fs-extra')
 /** @type {typeof path.join} */
 const resolve = path.join.bind(path, __dirname, '..')
-
-const copyFile = promisify(fs.copyFile)
-/** @type {(path: string) => Promise<void>} */
-const rmdir = promisify(require('rmdir'))
-const mkdir = promisify(fs.mkdir)
-const readdir = promisify(fs.readdir)
 
 const main = async () => {
 	const publicPath = resolve('public')
 	const buildPath = resolve('build')
 
 	try {
-		await rmdir(buildPath)
+		await fs.rmdir(buildPath)
 	} catch (x) {}
 
-	await mkdir(buildPath)
+	await fs.mkdir(buildPath)
 
 	await Promise.all(
-		(await readdir(publicPath)).map(async file => {
-			await copyFile(`${publicPath}/${file}`, `${buildPath}/${file}`)
+		(await fs.readdir(publicPath)).map(async file => {
+			await fs.copyFile(`${publicPath}/${file}`, `${buildPath}/${file}`)
 		}),
 	)
 }
