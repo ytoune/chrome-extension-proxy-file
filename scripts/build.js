@@ -13,7 +13,7 @@ const main = async () => {
 
 	await Promise.all(
 		(await fs.readdir(publicPath)).map(async file => {
-			await fs.copyFile(`${publicPath}/${file}`, `${buildPath}/${file}`)
+			await fs.copyFile(path.join(publicPath, file), path.join(buildPath, file))
 		}),
 	)
 }
