@@ -1,6 +1,8 @@
 {
 	"editor.formatOnSave": false,
-	"eslint.autoFixOnSave": true,
+	"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 	"eslint.enable": true,
 	"eslint.nodePath": "node_modules",
 	"eslint.options": {

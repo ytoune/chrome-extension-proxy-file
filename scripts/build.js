@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 const path = require('path')
 const fs = require('fs-extra')
 /** @type {typeof path.join} */
