@@ -8,10 +8,7 @@ const main = async () => {
 	const publicPath = resolve('public')
 	const buildPath = resolve('build')
 
-	try {
-		await fs.rmdir(buildPath)
-	} catch (x) {}
-
+	await fs.remove(buildPath)
 	await fs.mkdir(buildPath)
 
 	await Promise.all(
