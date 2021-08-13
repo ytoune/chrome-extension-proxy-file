@@ -1,24 +1,47 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "node scripts/build.js && parcel build src/background.ts --out-dir build --no-source-maps"
-  },
-  "devDependencies": {
-    "@types/chrome": "0.0.126",
-    "@types/fs-extra": "9.0.4",
-    "@types/mime-types": "2.1.0",
-    "@typescript-eslint/eslint-plugin": "4.8.2",
-    "@typescript-eslint/parser": "4.8.2",
-    "eslint": "7.14.0",
-    "eslint-config-prettier": "6.15.0",
-    "eslint-plugin-prettier": "3.1.4",
-    "fs-extra": "9.0.1",
-    "mime-types": "2.1.27",
-    "parcel": "1.12.4",
-    "prettier": "2.2.0",
-    "typescript": "4.1.2"
-  },
-  "resolutions": {
-    "node-forge": "0.10.0"
-  }
+	"private": true,
+	"scripts": {
+		"build": "rimraf build && cp -r public build && NODE_ENV=production npm run ts-node scripts/build.ts",
+		"ts-node": "node -r esbuild-register"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/chrome": "0.0.154",
+		"@types/mime-types": "2.1.0",
+		"@types/node": "16.6.1",
+		"@typescript-eslint/eslint-plugin": "4.29.1",
+		"@typescript-eslint/parser": "4.29.1",
+		"esbuild": "0.12.20",
+		"esbuild-register": "3.0.0",
+		"eslint": "7.32.0",
+		"eslint-config-prettier": "8.3.0",
+		"eslint-import-resolver-typescript": "2.4.0",
+		"eslint-plugin-import": "2.24.0",
+		"eslint-plugin-prettier": "3.4.0",
+		"mime-types": "2.1.32",
+		"path": "0.12.7",
+		"prettier": "2.3.2",
+		"rimraf": "3.0.2",
+		"ts-node": "10.2.0",
+		"typescript": "4.3.5"
+	},
+	"prettier": {
+		"useTabs": true,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"semi": false,
+		"arrowParens": "avoid",
+		"overrides": [
+			{
+				"files": [
+					"*.md",
+					"*.yml",
+					"*.yaml"
+				],
+				"options": {
+					"useTabs": false
+				}
+			}
+		]
+	}
 }
