@@ -8,11 +8,17 @@ export const fetchSync = (path: string) => {
 			if (200 === xhr.status) {
 				// console.log('ok')
 			} else {
-				console.error(xhr.statusText)
+				if (0 === xhr.status && path.startsWith('file://')) {
+					// ignore.
+				} else {
+					console.log(`status is ${xhr.status}.`)
+					console.error(xhr.statusText)
+				}
 			}
 		}
 	}
 	xhr.onerror = _ => {
+		console.log('an error happens.')
 		console.error(xhr.statusText)
 	}
 	xhr.send(null)
