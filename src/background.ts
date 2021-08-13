@@ -50,3 +50,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 	{ urls: ['<all_urls>'] },
 	['blocking'],
 )
+
+console.log(
+	`example: redirects.set(/target\\.js$/ui, 'file:///foobar/mock.js')`,
+)
