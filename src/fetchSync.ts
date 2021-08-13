@@ -1,7 +1,7 @@
 const { DONE } = XMLHttpRequest
 
 export const fetchSync = (path: string) => {
-	var xhr = new XMLHttpRequest()
+	const xhr = new XMLHttpRequest()
 	xhr.open('GET', path, false)
 	xhr.onload = _ => {
 		if (DONE === xhr.readyState) {

@@ -1,5 +1,5 @@
-export const encode = (s: string) => Base64.encode(s)
-export const decode = (s: string) => Base64.decode(s)
+export const encode = (s: string): string => Base64.encode(s)
+export const decode = (s: string): string => Base64.decode(s)
 
 /**
  *
@@ -14,12 +14,18 @@ const Base64 = {
 	_keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 
 	// public method for encoding
-	encode: function (input: string) {
-		var output = ''
-		var chr1, chr2, chr3, enc1, enc2, enc3, enc4
-		var i = 0
+	encode(input_: string) {
+		let output = ''
+		let chr1: number,
+			chr2: number,
+			chr3: number,
+			enc1: number,
+			enc2: number,
+			enc3: number,
+			enc4: number
+		let i = 0
 
-		input = Base64._utf8_encode(input)
+		const input = Base64._utf8_encode(input_)
 
 		while (i < input.length) {
 			chr1 = input.charCodeAt(i++)
@@ -31,9 +37,9 @@ const Base64 = {
 			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6)
 			enc4 = chr3 & 63
 
-			if (isNaN(chr2)) {
+			if (Number.isNaN(chr2)) {
 				enc3 = enc4 = 64
-			} else if (isNaN(chr3)) {
+			} else if (Number.isNaN(chr3)) {
 				enc4 = 64
 			}
 
@@ -49,13 +55,13 @@ const Base64 = {
 	}, // End Function encode
 
 	// public method for decoding
-	decode: function (input: string) {
-		var output = ''
-		var chr1, chr2, chr3
-		var enc1, enc2, enc3, enc4
-		var i = 0
+	decode(input_: string) {
+		let output = ''
+		let chr1: number, chr2: number, chr3: number
+		let enc1: number, enc2: number, enc3: number, enc4: number
+		let i = 0
 
-		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '')
+		const input = input_.replace(/[^A-Za-z0-9\+\/\=]/g, '')
 		while (i < input.length) {
 			enc1 = this._keyStr.indexOf(input.charAt(i++))
 			enc2 = this._keyStr.indexOf(input.charAt(i++))
@@ -83,12 +89,12 @@ const Base64 = {
 	}, // End Function decode
 
 	// private method for UTF-8 encoding
-	_utf8_encode: function (string: string) {
-		var utftext = ''
-		string = string.replace(/\r\n/g, '\n')
+	_utf8_encode(string_: string) {
+		let utftext = ''
+		const string = string_.replace(/\r\n/g, '\n')
 
-		for (var n = 0; n < string.length; n++) {
-			var c = string.charCodeAt(n)
+		for (let n = 0; n < string.length; n++) {
+			const c = string.charCodeAt(n)
 
 			if (c < 128) {
 				utftext += String.fromCharCode(c)
@@ -106,11 +112,12 @@ const Base64 = {
 	}, // End Function _utf8_encode
 
 	// private method for UTF-8 decoding
-	_utf8_decode: function (utftext: string) {
-		var string = ''
-		var i = 0
-		var c, c1, c2, c3
-		c = c1 = c2 = 0
+	_utf8_decode(utftext: string) {
+		let string = ''
+		let i = 0
+		let c = 0
+		let c2 = 0
+		let c3 = 0
 
 		while (i < utftext.length) {
 			c = utftext.charCodeAt(i)
@@ -134,4 +141,4 @@ const Base64 = {
 
 		return string
 	}, // End Function _utf8_decode
-}
+} as const

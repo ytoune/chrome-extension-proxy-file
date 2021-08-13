@@ -1,6 +1,6 @@
+import { lookup } from 'mime-types'
 import { fetchSync } from './fetchSync'
 
-import { lookup } from 'mime-types'
 import * as base64 from './base64'
 
 // const toBlobFromData = (bin: string, type: string) => {
@@ -8,12 +8,10 @@ import * as base64 from './base64'
 // 	return new Blob([buffer], { type })
 // }
 
-export const getRedirectUrl = (path: string) => {
+export const getRedirectUrl = (path: string, mimetype?: string) => {
 	if (/^(https?|data):/u.test(path)) return path
 
-	const type = path.endsWith('/home/js/app.php')
-		? 'application/javascript'
-		: lookup(path)
+	const type = mimetype || lookup(path)
 
 	if (!type) return path
 
